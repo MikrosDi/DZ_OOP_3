@@ -21,7 +21,6 @@ class Parallelogram : protected Figure
 public:
     int base;   
     int height; 
-public:
     Parallelogram() {
         base = 2;
         height = 2;
@@ -38,8 +37,6 @@ class Circle : protected Figure
 public:
     double radius;   
     double P;   
-    
-public:
     Circle() {
         radius = 3;
         P = 3.1415;
@@ -106,71 +103,84 @@ class Car
 protected:
     string company, model;
 public:
-    Car(){}
-    
-       Car(string inputCompany, string inputModel): company(inputCompany), model(inputModel)
-       {
+    Car()
+    {
+        company = "Mercedes ";
+        model = "S500";
+    }
+    Car(string inputCompany, string inputModel) : company(inputCompany), model(inputModel) {
+    }
+     virtual ~Car()
+    {
         setlocale(LC_ALL, "rus");
-        
-            cout << "\n" << "(Конструктор)\n" << "company - " << company << "\nmodel - " << model << endl;
-       }
-        virtual ~Car()
-        {
-            cout << "\nДеструктор базового класса Car сработал!";
-        }
-    
+        cout << "\nДеструктор базового класса Car сработал!";
+    }
+     void Print()
+    {
+        setlocale(LC_ALL, "rus");
+        cout << "\n" << "(Конструктор)\n" << "Company - " << company << "\nModel - " << model << endl;
+    }
+  
 };
 
-class PassengerCar : virtual protected Car
+class PassengerCar : virtual public Car 
 {
 public:
     
-    PassengerCar(){}
-    PassengerCar(string inputCompany, string inputModel) : Car(inputCompany, inputModel)
+    PassengerCar()
     {
-        setlocale(LC_ALL, "rus");
-
-        cout << "\n" << "(Конструктор)\n" << "company - " << company << "\nmodel - " << model << endl;
+        company = "Porsche ";
+        model = "911";
+    }
+    PassengerCar(string inputCompany, string inputModel) : Car(inputCompany, inputModel) {
     }
     ~PassengerCar()
     {
+        setlocale(LC_ALL, "rus");
         cout << "\nДеструктор наследника PassengerCar сработал!";
     }
+
 };
 
-class Bus : virtual protected Car
+class Bus : virtual public Car
 {
 public:
-  
-    Bus(){}
-    Bus(string inputCompany, string inputModel) : Car(inputCompany, inputModel)
-    {
-        setlocale(LC_ALL, "rus");
 
-        cout << "\n" << "(Конструктор)\n" << "company - " << company << "\nmodel - " << model << endl;
+    Bus()
+    {
+        company = "MAN ";
+        model = "Lion's Coach";
+    }
+    Bus(string inputCompany, string inputModel) : Car(inputCompany, inputModel) {
     }
     ~Bus()
     {
+        setlocale(LC_ALL, "rus");
         cout << "\nДеструктор наследника Bus сработал!";
     }
+
+
 };
 
-class Minivan : public PassengerCar, public Bus
+class Minivan : virtual public PassengerCar, virtual public Bus
 {
 public:
-    
-    Minivan(){}
-    Minivan(string inputCompany, string inputModel) : Car(inputCompany, inputModel)
-    {
-        setlocale(LC_ALL, "rus");
 
-        cout << "\n" << "(Конструктор)\n" << "company - " << company << "\nmodel - " << model << endl;
+    Minivan()
+    {
+        company = "Toyota ";
+        model = "Alphard";
+    }
+    Minivan(string inputCompany, string inputModel) : Car(inputCompany, inputModel) {
     }
     ~Minivan()
     {
+        setlocale(LC_ALL, "rus");
         cout << "\nДеструктор множественного наследника Minivan сработал!";
     }
+
 };
+
 
 /*Task 3
  Создать класс: Fraction (дробь). Дробь имеет числитель и знаменатель (например, 3/7 или 9/2). 
@@ -186,6 +196,7 @@ class Fraction
 protected:
     double Chislitel, Znaminatel; 
 public:
+
     Fraction() {}
     Fraction(double xChislitel, double yZnaminatel) : Chislitel(xChislitel), Znaminatel(yZnaminatel)
     {
@@ -284,107 +295,116 @@ bool operator>=(Fraction& d1, Fraction& d2)
 int main()
 {
     //Task 1
-
-    cout << "Task 1\n" << endl;
-    setlocale(LC_ALL, "rus");
-
-    int a;
-
-    do {
-        cout << "Введите цифру 1 для вывода дефолтного значения полей заданых через конструктор." << endl;
-        cout << "Введите цифру 2 для пользовательского ввода значения полей." << endl;
-        cout << "Введите цифру 1 или 2: ";
-        cin >> a;
-        cout << endl;
-    } while (a <= 0 || a >= 3);
-
-    switch (a)
+    
     {
-    case 1:
-    {
-        Parallelogram paral;
-        paral.area();
-        Circle circ;
-        circ.area();
-        Rectangle rect;
-        rect.area();
-        Square squar;
-        squar.area();
-        Rombus romb;
-        romb.area();
-    }
-       break;
+        cout << "Task 1\n" << endl;
+        setlocale(LC_ALL, "rus");
 
-    case 2:
-    {
-        double x_base;
-        double v_height;
-        double x_radius;
-        double P = 3.1415;
+        int a;
 
-        cout << "    Parallelogram\n" << "Введите первое число: ";
-        cin >> x_base;
-        cout << "Введите второе число: ";
-        cin >> v_height;
-        Parallelogram paral(x_base, v_height);
-        paral.area();
+        do {
+            cout << "Введите цифру 1 для вывода дефолтного значения полей заданых через конструктор." << endl;
+            cout << "Введите цифру 2 для пользовательского ввода значения полей." << endl;
+            cout << "Введите цифру 1 или 2: ";
+            cin >> a;
+            cout << endl;
+        } while (a <= 0 || a >= 3);
 
-        cout << "    Circle\n" << "Введите число: ";
-        cin >> x_radius;
-        Circle circ(x_radius, P);
-        circ.area();
+        switch (a)
+        {
+        case 1:
+        {
+            Parallelogram paral;
+            paral.area();
+            Circle circ;
+            circ.area();
+            Rectangle rect;
+            rect.area();
+            Square squar;
+            squar.area();
+            Rombus romb;
+            romb.area();
+        }
+         break;
 
-        cout << "     Rectangle\n" << "Введите первое число: ";
-        cin >> x_base;
-        cout << "Введите второе число: ";
-        cin >> v_height;
-        Rectangle rect(x_base, v_height);
-        rect.area();
+         case 2:
+         {
+            double x_base;
+            double v_height;
+            double x_radius;
+            double P = 3.1415;
 
-        cout << "       Square\n" << "Введите первое число: ";
-        cin >> x_base;
-        cout << "Введите второе число: ";
-        cin >> v_height;
-        Square squar(x_base, v_height);
-        squar.area();
+            cout << "    Parallelogram\n" << "Введите первое число: ";
+            cin >> x_base;
+            cout << "Введите второе число: ";
+            cin >> v_height;
+            Parallelogram paral(x_base, v_height);
+            paral.area();
 
-        cout << "       Rombus\n" << "Введите первое число: ";
-        cin >> x_base;
-        cout << "Введите второе число: ";
-        cin >> v_height;
-        Rombus romb(x_base, v_height);
-        romb.area();
-    }
-       break;
+            cout << "    Circle\n" << "Введите число: ";
+            cin >> x_radius;
+            Circle circ(x_radius, P);
+            circ.area();
+
+            cout << "     Rectangle\n" << "Введите первое число: ";
+            cin >> x_base;
+            cout << "Введите второе число: ";
+            cin >> v_height;
+            Rectangle rect(x_base, v_height);
+            rect.area();
+
+            cout << "       Square\n" << "Введите первое число: ";
+            cin >> x_base;
+            cout << "Введите второе число: ";
+            cin >> v_height;
+            Square squar(x_base, v_height);
+            squar.area();
+
+            cout << "       Rombus\n" << "Введите первое число: ";
+            cin >> x_base;
+            cout << "Введите второе число: ";
+            cin >> v_height;
+            Rombus romb(x_base, v_height);
+            romb.area();
+         }
+           break;
+        }
     };
+    
         //Task 2
 {
     cout << "Task 2" << endl;
-    Car* car = new Car("Mercedes", "S500");
-    PassengerCar* passengercar = new PassengerCar("Porsche", "911");
-    Bus* bus = new Bus("Audi", "Q8");
-    Minivan* minivan = new Minivan("Tesla", "Roadser");
-    delete car;
-    delete passengercar;
-    delete bus;
-    delete minivan;
+
+    Car car;
+    car.Print();
+    PassengerCar passengercar;
+    passengercar.Print();
+    Bus bus;
+    bus.Print();
+    Minivan minivan;
+    minivan.Print();
+    
 };
         //Task 3
         {
             cout << "\n\nTask 3\n\n";
+
             Fraction d1(3, 2);
             Fraction d2(8, 3);
+
             (d1 + d2).Print();
             (d1 - d2).Print();
             (d1 * d2).Print();
             (d1 / d2).Print();
             (-d1).Print();
+
             if (d1 == d2) cout << "\nFraction 1 == Fraction 2";
             if (d1 != d2) cout << "\nFraction 1 != Fraction 2";
             if (d1 > d2) cout << "\nFraction 1 > Fraction 2";
             if (d1 <= d2) cout << "\nFraction 1 <= Fraction 2";
             if (d1 < d2) cout << "\nFraction 1 < Fraction 2";
             if (d1 >= d2) cout << "\nFraction 1 >= Fraction 2";
+
             cout << "\n";
         }
         return 0;  
