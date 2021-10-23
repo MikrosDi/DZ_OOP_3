@@ -22,6 +22,10 @@ public:
     int base;   
     int height; 
 public:
+    Parallelogram() {
+        base = 2;
+        height = 2;
+    }
     Parallelogram(int x_base, int v_height) : base(x_base), height(v_height) {}
     void area() override 
     {
@@ -36,6 +40,10 @@ public:
     double P;   
     
 public:
+    Circle() {
+        radius = 3;
+        P = 3.1415;
+    }
     Circle(double x_radius, double x_p) : radius(x_radius), P(x_p = 3.1415) {} 
     void area() override
     {
@@ -46,6 +54,10 @@ public:
 class Rectangle : protected Parallelogram 
 {
 public:
+    Rectangle() {
+        base = 4;
+        height = 4;
+    }
     Rectangle(double x_base, double v_height) : Parallelogram(x_base, v_height) {}
     void area() override
     {
@@ -56,6 +68,10 @@ public:
 class Square : protected Parallelogram 
 {
 public:
+    Square() {
+        base = 5;
+        height = 5;
+    }
     Square(double x_base, double v_height) : Parallelogram(x_base, v_height) {}
     void area() override
     {
@@ -66,12 +82,17 @@ public:
 class Rombus : protected Parallelogram 
 {
 public:
+    Rombus() {
+        base = 6;
+        height = 6;
+    }
     Rombus(double x_base, double v_height) : Parallelogram(x_base, v_height) {}
     void area() override
     {
         cout << "Площадь ромба = " << base * height << "\n\n";
     }
 };
+
 
 /* Задание 2
 Создать класс Car (автомобиль) с полями company (компания) и model (модель). 
@@ -260,13 +281,42 @@ bool operator>=(Fraction& d1, Fraction& d2)
 
 
 
-    int main()
+int main()
 {
     //Task 1
-   {
-     cout << "Task 1\n" << endl;
-        setlocale(LC_ALL, "rus");
 
+    cout << "Task 1\n" << endl;
+    setlocale(LC_ALL, "rus");
+
+    int a;
+
+    do {
+        cout << "Введите цифру 1 для вывода дефолтного значения полей заданых через конструктор." << endl;
+        cout << "Введите цифру 2 для пользовательского ввода значения полей." << endl;
+        cout << "Ваше значение: ";
+        cin >> a;
+        cout << endl;
+    } while (a <= 0 || a >= 3);
+
+    switch (a)
+    {
+    case 1:
+    {
+        Parallelogram paral;
+        paral.area();
+        Circle circ;
+        circ.area();
+        Rectangle rect;
+        rect.area();
+        Square squar;
+        squar.area();
+        Rombus romb;
+        romb.area();
+    }
+       break;
+
+    case 2:
+    {
         double x_base;
         double v_height;
         double x_radius;
@@ -305,11 +355,10 @@ bool operator>=(Fraction& d1, Fraction& d2)
         Rombus romb(x_base, v_height);
         romb.area();
     }
-    
-
-    //Task 2
-    
-    {
+       break;
+    };
+        //Task 2
+{
     cout << "Task 2" << endl;
     Car* car = new Car("Mercedes", "S500");
     PassengerCar* passengercar = new PassengerCar("Porsche", "911");
@@ -319,28 +368,24 @@ bool operator>=(Fraction& d1, Fraction& d2)
     delete passengercar;
     delete bus;
     delete minivan;
-    } 
-    
-
-    //Task 3
-    {
-        cout << "\n\nTask 3\n\n";
-        Fraction d1(3, 2);
-        Fraction d2(8, 3);
-        (d1 + d2).Print();
-        (d1 - d2).Print();
-        (d1 * d2).Print();
-        (d1 / d2).Print();
-        (-d1).Print();
-        if (d1 == d2) cout << "\nFraction 1 == Fraction 2";
-        if (d1 != d2) cout << "\nFraction 1 != Fraction 2";
-        if (d1 > d2) cout << "\nFraction 1 > Fraction 2";
-        if (d1 <= d2) cout << "\nFraction 1 <= Fraction 2";
-        if (d1 < d2) cout << "\nFraction 1 < Fraction 2";
-        if (d1 >= d2) cout << "\nFraction 1 >= Fraction 2";
-        cout << "\n";
-    }
-    return 0;
-   
-
+};
+        //Task 3
+        {
+            cout << "\n\nTask 3\n\n";
+            Fraction d1(3, 2);
+            Fraction d2(8, 3);
+            (d1 + d2).Print();
+            (d1 - d2).Print();
+            (d1 * d2).Print();
+            (d1 / d2).Print();
+            (-d1).Print();
+            if (d1 == d2) cout << "\nFraction 1 == Fraction 2";
+            if (d1 != d2) cout << "\nFraction 1 != Fraction 2";
+            if (d1 > d2) cout << "\nFraction 1 > Fraction 2";
+            if (d1 <= d2) cout << "\nFraction 1 <= Fraction 2";
+            if (d1 < d2) cout << "\nFraction 1 < Fraction 2";
+            if (d1 >= d2) cout << "\nFraction 1 >= Fraction 2";
+            cout << "\n";
+        }
+        return 0;  
 };
